@@ -13,10 +13,10 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <jdk.version>1.10</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <junit.jupiter.version>5.0.0-M4</junit.jupiter.version>
         <junit.platform.version>1.0.0-M4</junit.platform.version>
-        <proguard.version>2.0.13</proguard.version>
+        <proguard.version>2.0.14</proguard.version>
         <proguard.base>5.0</proguard.base>
 
     </properties>
@@ -46,11 +46,7 @@
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.github.wvengen</groupId>
-                <artifactId>proguard-maven-plugin</artifactId>
-                <version>${proguard.version}</version>
-            </plugin>
+
                  
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -76,6 +72,62 @@
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.13</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>5.0</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                        <configuration>
+
+                            <proguardVersion>5.0</proguardVersion>
+                            <options>
+                                <option>-target 1.8</option>
+                                <option>-dontnote</option>
+                                <option>-dontshrink</option>
+                                <option>-dontoptimize</option>
+                                <option>-dontpreverify</option>
+                                <option>-dontskipnonpubliclibraryclasses</option>
+                                <option>-dontskipnonpubliclibraryclassmembers</option>
+                                <option>-allowaccessmodification</option>
+                                <option>-repackageclasses ''</option>
+                                <option>-keep public class java.ru.otus.Main.javaMain{public static void
+                                    main(java.lang.String[]);}</option>
+                                <option>-keepattributes InnerClasses,Signature,LineNumberTable,*Annotation*,EnclosingMethod</option>
+                                <option>-keepclassmembers enum * { public static **[] values(); public static ** valueOf(java.lang.String); }</option>
+                                <option>-dontwarn org.spout.**</option>
+                                <option>-dontwarn com.google.**</option>
+                            </options>
+                            <obfuscate>true</obfuscate>
+                            <injar>${project.build.finalName}-jar-with-dependencies.jar</injar>
+                            <outjar>${project.build.finalName}-small.jar</outjar>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <proguardInclude>${basedir}/proguard.conf</proguardInclude>
+                            <includeDependency>true</includeDependency>
+                            <libs>
+                                <lib>${java.home}/lib/rt.jar</lib>
+                                <lib>${java.home}/lib/jsse.jar</lib>
+                            </libs>
+                        </configuration>
+
+                    </execution>
+                </executions>
+
             </plugin>
         </plugins>
     </build>
