@@ -106,7 +106,7 @@
                                 <option>-dontskipnonpubliclibraryclassmembers</option>
                                 <option>-allowaccessmodification</option>
                                 <option>-repackageclasses ''</option>
-                                <option>-keep public class java.ru.otus.Main.javaMain{public static void
+                                <option>-keep public class ru.otus.Main{public static void
                                     main(java.lang.String[]);}</option>
                                 <option>-keepattributes InnerClasses,Signature,LineNumberTable,*Annotation*,EnclosingMethod</option>
                                 <option>-keepclassmembers enum * { public static **[] values(); public static ** valueOf(java.lang.String); }</option>
