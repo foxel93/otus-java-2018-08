@@ -263,4 +263,9 @@ public class MyArrayList<E> implements List<E> {
         }
         return null;
     }
+    
+    @Override
+    public void sort(Comparator<? super E> c) {
+        Arrays.sort(elements, 0, size(), c);
+    }
 }
