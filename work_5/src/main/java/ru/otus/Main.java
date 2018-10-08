@@ -8,9 +8,9 @@ import java.util.concurrent.Executors;
 
 /**
  java -Xmx512m -Xms512m -XX:+UseSerialGC -jar target/work_5.jar > SerialGCReport.txt
- java -Xmx128m -Xms128m -XX:+UseParallelGC -jar target/work_5.jar > ParallelGCReport.txt
- java -Xmx128m -Xms128m -XX:+UseConcMarkSweepGC -jar target/work_5.jar > CMSGCReport.txt
- java -Xmx128m -Xms128m -XX:+UseG1GC -jar target/work_5.jar > G1Report.txt
+ java -Xmx512m -Xms512m -XX:+UseParallelGC -jar target/work_5.jar > ParallelGCReport.txt
+ java -Xmx512m -Xms512m -XX:+UseConcMarkSweepGC -jar target/work_5.jar > CMSGCReport.txt
+ java -Xmx512m -Xms512m -XX:+UseG1GC -jar target/work_5.jar > G1Report.txt
  */
 public class Main {
 	
